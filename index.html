@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <title>Unity WebGL Game</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    #gameContainer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <!-- Unity WebGL loader will inject the canvas here -->
+  </div>
+
+  <!-- Unity WebGL Build integration -->
+  <script src="webglBuild1/Build/webglBuild1.loader.js"></script>
+  <script>
+    var buildUrl = "webglBuild1/Build";
+    var config = {
+      dataUrl: buildUrl + "/webglBuild1.data",
+      frameworkUrl: buildUrl + "/webglBuild1.framework.js",
+      codeUrl: buildUrl + "/webglBuild1.wasm",
+      streamingAssetsUrl: "StreamingAssets", // adjust if you use streaming assets
+      companyName: "YourCompany",
+      productName: "YourGame",
+      productVersion: "1.0.0"
+    };
+    createUnityInstance(document.getElementById("gameContainer"), config)
+      .then((unityInstance) => {
+        // Unity loaded
+      })
+      .catch((message) => {
+        alert(message);
+      });
+  </script>
+</body>
+</html>
