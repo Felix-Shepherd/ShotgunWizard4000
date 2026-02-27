@@ -1,0 +1,50 @@
+/* ... existing styles ... */
+
+/* make page fill the screen */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+  color: #fff;
+}
+
+/* video as full‑screen background */
+h1 {
+  font-size: 3rem;
+  margin-top: 0.5rem;
+  color: #ff0000;
+  font-family: "Lucida Console", "Courier New", Courier,
+}
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;      /* stretch while preserving aspect ratio */
+  z-index: -1;            /* behind everything else */
+}
+
+/* overlay container */
+.overlay {
+  position: relative;     /* sits above the video */
+  z-index: 1;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 2rem;
+}
+
+/* optional: darken background for readability */
+.overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: -1;
+}
+
+
+
+
