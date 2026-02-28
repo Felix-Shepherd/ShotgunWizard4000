@@ -28,9 +28,7 @@
     const dlLink = document.getElementById('download-link');
     dlLink.addEventListener('click', function (e) {
       e.preventDefault();               // stop immediate navigation
-      setTimeout(() => {
-        window.location.href = dlLink.href; // navigate after 5 s
-      }, 5000);                         // 5000 ms = 5 seconds
+      window.location.href = dlLink.href;
     });
   </script>
 </body>
