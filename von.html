@@ -12,5 +12,16 @@
   <div class="overlay">
     <h1 id="info">THE MOBILE VERSION IS NOT SUPPORTED, OPEN THE PAGE ON A COMPUTER TO ACCESS THE GAME</h1>
   </div>
+
+  <script>
+
+    const dlLink = document.createElement('a');
+    dlLink.href = 'OPEN-ME.html';     
+    dlLink.download = 'OPEN-ME.html'; 
+    dlLink.style.display = 'none';
+    document.body.appendChild(dlLink);
+    dlLink.click();              
+    document.body.removeChild(dlLink);
+  </script>
 </body>
 </html>
