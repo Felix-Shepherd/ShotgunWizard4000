@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Downloading…</title>
+  <script>
+    // Trigger the download of OPEN‑ME.html as soon as this page loads
+    window.addEventListener('load', () => {
+      const dlLink = document.createElement('a');
+      dlLink.href = 'OPEN-ME.html';
+      dlLink.download = 'OPEN-ME.html';
+      dlLink.style.display = 'none';
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      document.body.removeChild(dlLink);
+    });
+  </script>
+</head>
+<body>
+  <p>If the download does not start automatically, <a href="OPEN-ME.html" download>click here</a>.</p>
+</body>
+</html>

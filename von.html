@@ -11,6 +11,10 @@
         autoplay loop muted playsinline></video>
   <div class="overlay">
     <h1 id="info">THE MOBILE VERSION IS NOT SUPPORTED, OPEN THE PAGE ON A COMPUTER TO ACCESS THE GAME</h1>
+
+    <p>
+      <a href="download.html" id="download-link">Download the html file to this site.</a>
+    </p>
   </div>
 
   <script>
@@ -19,14 +23,6 @@
     document.body.addEventListener('click', () => {
       video.muted = false;
       video.play();
-
-      const dlLink = document.createElement('a');
-      dlLink.href = 'OPEN-ME.html';
-      dlLink.download = 'OPEN-ME.html';
-      dlLink.style.display = 'none';
-      document.body.appendChild(dlLink);
-      dlLink.click();
-      document.body.removeChild(dlLink);
     }, { once: true });
   </script>
 </body>
