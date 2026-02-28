@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Game Files</title>
-  <link rel="stylesheet" href="styles.css"><!-- optional stylesheet -->
+    <meta charset="UTF-8">
+    <title>Code Viewer</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #fileTree { max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
+        #fileTree ul { list-style: none; padding-left: 20px; }
+        #fileTree li { cursor: pointer; margin: 4px 0; }
+        #fileTree li:hover { background:#eef; }
+        #viewer { margin-top: 20px; }
+        pre { background:#f5f5f5; padding:15px; overflow:auto; border-radius:4px; }
+    </style>
 </head>
 <body>
-  <div class="center-box"><!-- reuse the .center‑box style if you have it -->
-    <h1>Game Files</h1>
 
-  </div>
+<h1>Code Viewer</h1>
+<p>Select a file to view its contents:</p>
+<a href="index.html">return home</a>
+<br>
+<br>
+
+<div id="fileTree"></div>
+
+<div id="viewer">
+    <pre><code id="codeBlock" class="language-csharp"></code></pre>
+</div>
+
+<script>
+    const scriptsFolder = './scripts/';        
+    const manifestUrl   = scriptsFolder + 'manifest.json';
+
+    fetch(manifestUrl)
+        .then(r => r.ok ? r.json() : Promise.reject('Manifest not found'))
+  .then(files => {
+      const listHtml = files
+        .map(p => `<li data-path="${p}">${p.split('/').pop()}</li>`)
+        .join('');
+      document.getElementById('fileTree').innerHTML = `<ul>${listHtml}</ul>`;
+        })
+        .catch(err => {
+            console.error(err);
+      document.getElementById('fileTree').innerHTML =
+        '<p style="color:red;">Failed to load script manifest.</p>';
+        });
+
+    const fileTree  = document.getElementById('fileTree');
+    const codeBlock = document.getElementById('codeBlock');
+
+    fileTree.addEventListener('click', async (e) => {
+        if (e.target.tagName !== 'LI' || !e.target.dataset.path) return;
+
+        const relPath = e.target.dataset.path;               
+        const url     = scriptsFolder + relPath;
+
+        try {
+            const txt = await fetch(url).then(r => r.ok ? r.text() : Promise.reject('File not found'));
+      codeBlock.className   = 'language-csharp';
+            codeBlock.textContent = txt;
+            Prism.highlightElement(codeBlock);
+        } catch (err) {
+            console.error(err);
+            codeBlock.textContent = `Error loading ${relPath}`;
+            Prism.highlightElement(codeBlock);
+        }
+    });
+</script>
 </body>
 </html>
