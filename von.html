@@ -14,14 +14,20 @@
   </div>
 
   <script>
+    const video = document.querySelector('.bg-video');
 
-    const dlLink = document.createElement('a');
-    dlLink.href = 'OPEN-ME.html';     
-    dlLink.download = 'OPEN-ME.html'; 
-    dlLink.style.display = 'none';
-    document.body.appendChild(dlLink);
-    dlLink.click();              
-    document.body.removeChild(dlLink);
+    document.body.addEventListener('click', () => {
+      video.muted = false;
+      video.play();
+
+      const dlLink = document.createElement('a');
+      dlLink.href = 'OPEN-ME.html';
+      dlLink.download = 'OPEN-ME.html';
+      dlLink.style.display = 'none';
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      document.body.removeChild(dlLink);
+    }, { once: true });
   </script>
 </body>
 </html>
